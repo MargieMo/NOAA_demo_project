@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.energybot.stationInfor.db.mappers.StationMapper">
+  <resultMap id="BaseResultMap" type="com.energybot.stationInfor.db.po.Station">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="station_id" jdbcType="VARCHAR" property="stationId" />
+    <result column="test_time" jdbcType="VARCHAR" property="testTime" />
+    <result column="element" jdbcType="VARCHAR" property="element" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="mflag" jdbcType="VARCHAR" property="mflag" />
+    <result column="qflag" jdbcType="VARCHAR" property="qflag" />
+    <result column="sflag" jdbcType="VARCHAR" property="sflag" />
+    <result column="extra_value" jdbcType="VARCHAR" property="extraValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, station_id, test_time, element, value, mflag, qflag, sflag, extra_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from station_infor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByStationId" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from station_infor
+    where station_id = #{stationId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from station_infor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.energybot.stationInfor.db.po.Station">
+    insert into station_infor (id, station_id, test_time, 
+      element, value, mflag, 
+      qflag, sflag, extra_value
+      )
+    values (#{id,jdbcType=INTEGER}, #{stationId,jdbcType=VARCHAR}, #{testTime,jdbcType=VARCHAR}, 
+      #{element,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{mflag,jdbcType=VARCHAR}, 
+      #{qflag,jdbcType=VARCHAR}, #{sflag,jdbcType=VARCHAR}, #{extraValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.energybot.stationInfor.db.po.Station">
+    insert into station_infor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stationId != null">
+        station_id,
+      </if>
+      <if test="testTime != null">
+        test_time,
+      </if>
+      <if test="element != null">
+        element,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="mflag != null">
+        mflag,
+      </if>
+      <if test="qflag != null">
+        qflag,
+      </if>
+      <if test="sflag != null">
+        sflag,
+      </if>
+      <if test="extraValue != null">
+        extra_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationId != null">
+        #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="testTime != null">
+        #{testTime,jdbcType=VARCHAR},
+      </if>
+      <if test="element != null">
+        #{element,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="mflag != null">
+        #{mflag,jdbcType=VARCHAR},
+      </if>
+      <if test="qflag != null">
+        #{qflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sflag != null">
+        #{sflag,jdbcType=VARCHAR},
+      </if>
+      <if test="extraValue != null">
+        #{extraValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.energybot.stationInfor.db.po.Station">
+    update station_infor
+    <set>
+      <if test="stationId != null">
+        station_id = #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="testTime != null">
+        test_time = #{testTime,jdbcType=VARCHAR},
+      </if>
+      <if test="element != null">
+        element = #{element,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="mflag != null">
+        mflag = #{mflag,jdbcType=VARCHAR},
+      </if>
+      <if test="qflag != null">
+        qflag = #{qflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sflag != null">
+        sflag = #{sflag,jdbcType=VARCHAR},
+      </if>
+      <if test="extraValue != null">
+        extra_value = #{extraValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.energybot.stationInfor.db.po.Station">
+    update station_infor
+    set station_id = #{stationId,jdbcType=VARCHAR},
+      test_time = #{testTime,jdbcType=VARCHAR},
+      element = #{element,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      mflag = #{mflag,jdbcType=VARCHAR},
+      qflag = #{qflag,jdbcType=VARCHAR},
+      sflag = #{sflag,jdbcType=VARCHAR},
+      extra_value = #{extraValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
